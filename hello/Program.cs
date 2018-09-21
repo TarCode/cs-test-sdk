@@ -5,32 +5,32 @@ using System.IO;
 namespace hello
 {
     class Pokemon {
-        public Object GetPokemon() {
-            WebRequest request = WebRequest.Create(
-             "https://pokeapi.co/api/v2/pokemon/1");
-            // If required by the server, set the credentials.  
+
+        private string MakeRequest(string url) {
+            WebRequest request = WebRequest.Create(url);
+
             request.Credentials = CredentialCache.DefaultCredentials;
-            // Get the response.  
+
             WebResponse response = request.GetResponse();
-            // Display the status.  
-            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-            // Get the stream containing content returned by the server.  
+
             Stream dataStream = response.GetResponseStream();
-            // Open the stream using a StreamReader for easy access.  
             StreamReader reader = new StreamReader(dataStream);
-            // Read the content.  
+
             string responseFromServer = reader.ReadToEnd();
 
             reader.Close();
             response.Close();
 
-            // return content
             return responseFromServer;
+        }
 
-            // Clean up the streams and the response.  
+        public Object GetPokemon() {
+
+            return MakeRequest("https://pokeapi.co/api/v2/pokemon/1");
 
         }
     }
+
     class MainClass
     {
         public static void Main(string[] args)
