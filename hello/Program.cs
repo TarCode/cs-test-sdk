@@ -24,11 +24,11 @@ namespace hello
             return responseFromServer;
         }
 
-        public Object GetPokemon() {
-
-            return MakeRequest("https://pokeapi.co/api/v2/pokemon/1");
-
+        public Object GetPokemonById(string id) {
+            return MakeRequest("https://pokeapi.co/api/v2/pokemon/" + id);
         }
+
+
     }
 
     class MainClass
@@ -37,7 +37,7 @@ namespace hello
         {
             Pokemon p = new Pokemon();
 
-            Console.WriteLine(p.GetPokemon());
+            Console.WriteLine(p.GetPokemonById("1"));
         }
     }
 }
