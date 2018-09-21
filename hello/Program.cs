@@ -4,12 +4,10 @@ using System.IO;
 
 namespace hello
 {
-    class MainClass
-    {
-        public static void Main(string[] args)
-        {
+    class Pokemon {
+        public Object GetPokemon() {
             WebRequest request = WebRequest.Create(
-              "https://pokeapi.co/api/v2/pokemon/1");
+             "https://pokeapi.co/api/v2/pokemon/1");
             // If required by the server, set the credentials.  
             request.Credentials = CredentialCache.DefaultCredentials;
             // Get the response.  
@@ -22,11 +20,24 @@ namespace hello
             StreamReader reader = new StreamReader(dataStream);
             // Read the content.  
             string responseFromServer = reader.ReadToEnd();
-            // Display the content.  
-            Console.WriteLine(responseFromServer);
-            // Clean up the streams and the response.  
+
             reader.Close();
             response.Close();
+
+            // return content
+            return responseFromServer;
+
+            // Clean up the streams and the response.  
+
+        }
+    }
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            Pokemon p = new Pokemon();
+
+            Console.WriteLine(p.GetPokemon());
         }
     }
 }
